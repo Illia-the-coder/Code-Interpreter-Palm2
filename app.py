@@ -1,4 +1,4 @@
-import streamlit as st
+'images'import streamlit as st
 from bardapi import Bard
 import os
 import requests
@@ -27,12 +27,14 @@ DESCRIPTION = """
 def predict(message):
     with st.status("Requesting Palm-2🌴..."):
         st.write("Requesting API...")
-        response = bard.get_answer(message)
+        response = bard.get_answer(message+'Rule 1: If User requires a code snippet, write each code snippet only in that way that it would run in streamlit app.')
         st.write("Done...")
         
         st.write("Checking images...")
-    for i in response['links']:
+    for i in response['images']:
         st.image(i)
+    if response['code']:
+        exec(response['code'])
     return response['content']
 
 # Streamlit UI

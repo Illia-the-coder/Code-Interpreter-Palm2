@@ -15,7 +15,7 @@ session.headers = {
         }
 session.cookies.set("__Secure-1PSID", os.getenv("_BARD_API_KEY")) 
 
-bard = Bard(token=token, session=session)
+bard = Bard(token=os.getenv("_BARD_API_KEY"), session=session)
 
 TITLE = "Palm 2🌴 Chatbot"
 DESCRIPTION = """

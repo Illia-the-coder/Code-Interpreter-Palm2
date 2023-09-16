@@ -29,10 +29,11 @@ def predict(message):
         st.write("Requesting API...")
         response = bard.get_answer(message)
         st.write("Done...")
-        for i in response['links']:
-            st.image(i)
+        
         st.write("Checking images...")
-        return response['content']
+    for i in response['links']:
+        st.image(i)
+    return response['content']
 
 # Streamlit UI
 st.title(TITLE)

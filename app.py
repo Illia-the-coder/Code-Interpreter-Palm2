@@ -22,7 +22,7 @@ session.cookies.set("__Secure-1PSID", os.getenv("_BARD_API_KEY"))
 with st.sidebar:
     # Add a selector in the sidebar using the dictionary's keys
     selected_language_name = st.sidebar.selectbox("Select Language", list(GOOGLE_LANGUAGES_TO_CODES.keys()))
-    code_interpreter = st.sidebar.toggle("Code Interpreter", value=False)
+    code_interpreter = st.sidebar.toggle("Code Interpreter", value=True)
     system_prompt = st.sidebar.text_input("System prompt for code interpreter", value = "Rule 1: If a user requests a code snippet, provide only one that can run in a Streamlit app without requiring additional libraries.")
     useSystemPrompt = st.sidebar.toggle("Use System prompt", value=True)
     

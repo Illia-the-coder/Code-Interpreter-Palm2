@@ -2,23 +2,12 @@ import streamlit as st
 import json
 import os
 import requests
-from bardapi import Bard
+from bardapi import AsyncBard
 
 # Load the GOOGLE_LANGUAGES_TO_CODES dictionary from lang.json
 with open("lang.json", "r") as file:
     GOOGLE_LANGUAGES_TO_CODES = json.load(file)
 
-# Set up the session for Bard API
-session = requests.Session()
-session.headers = {
-    "Host": "bard.google.com",
-    "X-Same-Domain": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36",
-    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-    "Origin": "https://bard.google.com",
-    "Referer": "https://bard.google.com/",
-}
-session.cookies.set("__Secure-1PSID", os.getenv("_BARD_API_KEY"))
 with st.sidebar:
     # Add a selector in the sidebar using the dictionary's keys
     selected_language_name = st.sidebar.selectbox("Select Language", list(GOOGLE_LANGUAGES_TO_CODES.keys()))
@@ -32,7 +21,7 @@ with st.sidebar:
 selected_language_code = GOOGLE_LANGUAGES_TO_CODES[selected_language_name]
 
 # Initialize Bard with the selected language code
-bard = Bard(token=os.getenv("_BARD_API_KEY"), language=selected_language_code, session=session, timeout=30)
+bard = AsyncBard(token=os.getenv("_BARD_API_KEY"), language=selected_language_code)
 
 TITLE = "Palm 2🌴 Chatbot"
 DESCRIPTION = """
@@ -43,10 +32,10 @@ st.title(TITLE)
 st.write(DESCRIPTION)
 
 # Prediction function
-def predict(message):
+ async def predict(message):
     with st.status("Requesting Palm-2🌴..."):
         st.write("Requesting API...")
-        response = bard.get_answer(message if not (code_interpreter and useSystemPrompt) else message + system_prompt)
+        response = await bard.get_answer(message if not (code_interpreter and useSystemPrompt) else message + system_prompt)
         st.write("Done...")
         
         st.write("Checking images...")

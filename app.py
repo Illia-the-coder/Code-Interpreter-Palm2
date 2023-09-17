@@ -62,14 +62,11 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
         st.markdown(response['content'])
     
     if response['code']:
-        # if st.button('Run Code'):
-        with st.status("Running code..."):
-            try:
-                exec(response['code'])
-            except Exception as e:
-                st.write(f"ERROR {e}...")
-                    
-            
-            
+        if st.button('Run Code'):
+            with st.status("Running code..."):
+                try:
+                    exec(response['code'])
+                except Exception as e:
+                    st.write(f"ERROR {e}...")
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response['content']})

@@ -69,12 +69,13 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
         st.markdown(response['content'])
     
     if response['code']:
-        url = bard.export_replit(
-            code=response['code'],
-            program_lang=response['program_lang'],
-        )['url']
+        with st.status("Exporting replit..."):
+            url = bard.export_replit(
+                code=response['code'],
+                program_lang=response['program_lang'],
+            )['url']
         st.title('Export to repl.it')
-        st.text(url)
+        st.markdown(f'[{url}](link)')
         if code_interpreter:
             try:
                 exec(response['code'])

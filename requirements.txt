@@ -1,1 +1,6 @@
 bardapi
+sympy
+pandas
+numpy
+Pillow
+seaborn

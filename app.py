@@ -44,7 +44,7 @@ st.write(DESCRIPTION)
 def predict(message):
     with st.status("Requesting Palm-2🌴..."):
         st.write("Requesting API...")
-            response = bard.get_answer(message if not (code_interpreter and useSystemPrompt) else message + system_prompt)
+        response = bard.get_answer(message if not (code_interpreter and useSystemPrompt) else message + system_prompt)
         st.write("Done...")
         
         st.write("Checking images...")

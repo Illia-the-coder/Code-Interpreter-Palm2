@@ -19,10 +19,11 @@ session.headers = {
     "Referer": "https://bard.google.com/",
 }
 session.cookies.set("__Secure-1PSID", os.getenv("_BARD_API_KEY"))
-
-# Add a selector in the sidebar using the dictionary's keys
-selected_language_name = st.sidebar.selectbox("Select Language", list(GOOGLE_LANGUAGES_TO_CODES.keys()))
-
+with st.sidebar:
+    # Add a selector in the sidebar using the dictionary's keys
+    selected_language_name = st.sidebar.selectbox("Select Language", list(GOOGLE_LANGUAGES_TO_CODES.keys()))
+    code_interpreter = st.sidebar.checkbox("Code Interpreter", value=True)
+    
 # Retrieve the corresponding language code from the dictionary
 selected_language_code = GOOGLE_LANGUAGES_TO_CODES[selected_language_name]
 
@@ -67,7 +68,7 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
     with st.chat_message("assistant", avatar='🌴'):
         st.markdown(response['content'])
     
-    if response['code']:
+    if response['code'] and code_interpreter:
         try:
             exec(response['code'])
         except Exception as e:

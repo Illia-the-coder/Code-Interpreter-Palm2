@@ -42,7 +42,7 @@ st.write(DESCRIPTION)
 def predict(message):
     with st.status("Requesting Palm-2🌴..."):
         st.write("Requesting API...")
-        response = bard.get_answer(message if not code_interpreter else message + 'Rule 1: If User requires a code snippet, write each code snippet only in that way that it would run in streamlit app.')
+        response = bard.get_answer(message if not code_interpreter else message + "Rule 1: If User requires a code snippet, write each only one code snippet and only in that way that it would run in streamlit app, and but don't output anything if it requires some additional libraries.")
         st.write("Done...")
         
         st.write("Checking images...")

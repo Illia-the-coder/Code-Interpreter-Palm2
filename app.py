@@ -72,4 +72,4 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
             
             
     # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": response['content']})

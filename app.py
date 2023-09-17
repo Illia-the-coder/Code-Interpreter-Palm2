@@ -46,7 +46,7 @@ if "messages" not in st.session_state:
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+    with st.chat_message(message["role"], avatar=("🧑‍💻" if message["role"]=='human' else '🌴')):
         st.markdown(message["content"])
         
 # React to user input

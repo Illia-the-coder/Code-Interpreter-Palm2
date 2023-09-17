@@ -25,16 +25,7 @@ bard = BardAsync(token=os.getenv("_BARD_API_KEY"), language=selected_language_co
 
 TITLE = "Palm 2🌴 Chatbot"
 DESCRIPTION = """
-Welcome to the Palm 2🌴 Chatbot interface! 
-
-This app allows you to interact with the Palm 2🌴 Chatbot powered by the Bard API. You can:
-- Select a language for the chatbot.
-- Decide if you want the chatbot to interpret code.
-- Use a system prompt to guide the chatbot's responses.
-- Export code snippets to repl.it.
-- Choose to display images in the chatbot's responses.
-
-Simply type in your question or prompt in the chat input below and get a response from Palm 2🌴!
+Welcome to Palm 2🌴 Chatbot! Choose your language, interpret code, prompt the chatbot, export code to repl.it, and display images.
 """
 
 

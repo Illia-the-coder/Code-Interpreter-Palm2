@@ -75,7 +75,7 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
                 program_lang=response['program_lang'],
             )['url']
         st.title('Export to repl.it')
-        st.markdown(f'[{url}](link)')
+        st.markdown(f'[link]({url})')
         if code_interpreter:
             try:
                 exec(response['code'])

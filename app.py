@@ -74,4 +74,4 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
         except Exception as e:
             st.write(f"ERROR {e}...")
     
-    st.session_state.messages.append({"role": "assistant", "content": response['content']})
+    # st.session_state.messages.append({"role": "assistant", "content": response['content']})

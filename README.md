@@ -1,5 +1,5 @@
 ---
-title: Chat With Palm2
+title: Code-Interpreter with Palm2
 emoji: 🌴
 colorFrom: indigo
 colorTo: indigo

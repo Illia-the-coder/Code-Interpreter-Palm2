@@ -2,7 +2,7 @@ import streamlit as st
 import json
 import os
 import requests
-from bardapi import AsyncBard
+from bardapi import BardAsync
 
 # Load the GOOGLE_LANGUAGES_TO_CODES dictionary from lang.json
 with open("lang.json", "r") as file:
@@ -21,7 +21,7 @@ with st.sidebar:
 selected_language_code = GOOGLE_LANGUAGES_TO_CODES[selected_language_name]
 
 # Initialize Bard with the selected language code
-bard = AsyncBard(token=os.getenv("_BARD_API_KEY"), language=selected_language_code)
+bard = BardAsync(token=os.getenv("_BARD_API_KEY"), language=selected_language_code)
 
 TITLE = "Palm 2🌴 Chatbot"
 DESCRIPTION = """

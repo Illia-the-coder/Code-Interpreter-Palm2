@@ -62,7 +62,7 @@ for message in st.session_state.messages:
 # React to user input
 if prompt := st.chat_input("Ask Palm 2 anything..."):
     st.chat_message("human", avatar="🧑‍💻").markdown(prompt)
-    st.session_state.messages.append({"role": "human", "content": prompt})
+    # st.session_state.messages.append({"role": "human", "content": prompt})
 
     response = predict(prompt)
     with st.chat_message("assistant", avatar='🌴'):

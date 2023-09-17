@@ -43,7 +43,7 @@ st.title(TITLE)
 st.write(DESCRIPTION)
 
 # Prediction function
- async def predict(message):
+async def predict(message):
     with st.status("Requesting Palm-2🌴..."):
         st.write("Requesting API...")
         response = await bard.get_answer(message if not (code_interpreter and useSystemPrompt) else message + system_prompt)

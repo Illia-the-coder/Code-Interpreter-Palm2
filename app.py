@@ -68,10 +68,17 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
     with st.chat_message("assistant", avatar='🌴'):
         st.markdown(response['content'])
     
-    if response['code'] and code_interpreter:
-        try:
-            exec(response['code'])
-        except Exception as e:
-            st.write(f"ERROR {e}...")
+    if response['code']:
+        url = bard.export_replit(
+            code=response['code'],
+            program_lang=response['program_lang'],
+        )['url']
+        st.title('Export to repl.it')
+        st.text(url)
+        if code_interpreter:
+            try:
+                exec(response['code'])
+            except Exception as e:
+                st.write(f"ERROR {e}...")
     
     # st.session_state.messages.append({"role": "assistant", "content": response['content']})

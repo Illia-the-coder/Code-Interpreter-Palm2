@@ -12,7 +12,7 @@ with st.sidebar:
     # Add a selector in the sidebar using the dictionary's keys
     selected_language_name = st.sidebar.selectbox("Select Language", list(GOOGLE_LANGUAGES_TO_CODES.keys()))
     code_interpreter = st.sidebar.toggle("Code Interpreter", value=True)
-    system_prompt = st.sidebar.text_input("System prompt for code interpreter", value = " . Rule 1: If a user requests a code snippet, provide only one that can run in a Streamlit app without requiring additional libraries.")
+    system_prompt = st.sidebar.text_input("System prompt for code interpreter", value = "Rule 1: If a user requests a code snippet, provide only one that can run in a Streamlit app without requiring additional libraries.")
     useSystemPrompt = st.sidebar.toggle("Use System prompt", value=True)
     exportToReplIt = st.sidebar.toggle("Export to repl.it", value=False)
     showImages = st.sidebar.toggle("Show images", value=True)
@@ -46,7 +46,7 @@ st.write(DESCRIPTION)
 async def predict(message):
     with st.status("Requesting Palm-2🌴..."):
         st.write("Requesting API...")
-        response = await bard.get_answer(message if not (code_interpreter and useSystemPrompt) else message + system_prompt)
+        response = await bard.get_answer(message if not (code_interpreter and useSystemPrompt) else message + " . "+system_prompt)
         st.write("Done...")
         
         st.write("Checking images...")

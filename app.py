@@ -46,8 +46,9 @@ def predict(message):
         st.write("Done...")
         
         st.write("Checking images...")
-    for i in response['images']:
-        st.image(i)
+    if 'images' in response.keys():
+        for i in response['images']:
+            st.image(i)
     
     return response
 
@@ -62,7 +63,7 @@ for message in st.session_state.messages:
 # React to user input
 if prompt := st.chat_input("Ask Palm 2 anything..."):
     st.chat_message("human", avatar="🧑‍💻").markdown(prompt)
-    # st.session_state.messages.append({"role": "human", "content": prompt})
+    st.session_state.messages.append({"role": "human", "content": prompt})
 
     response = predict(prompt)
     with st.chat_message("assistant", avatar='🌴'):
@@ -82,4 +83,4 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
             except Exception as e:
                 st.write(f"ERROR {e}...")
     
-    # st.session_state.messages.append({"role": "assistant", "content": response['content']})
+    st.session_state.messages.append({"role": "assistant", "content": response['content']})

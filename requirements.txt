@@ -4,3 +4,4 @@ pandas
 numpy
 Pillow
 seaborn
+plotly

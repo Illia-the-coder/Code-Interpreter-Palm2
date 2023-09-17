@@ -25,6 +25,8 @@ with st.sidebar:
     code_interpreter = st.sidebar.toggle("Code Interpreter", value=True)
     system_prompt = st.sidebar.text_input("System prompt for code interpreter", value = "Rule 1: If a user requests a code snippet, provide only one that can run in a Streamlit app without requiring additional libraries.")
     useSystemPrompt = st.sidebar.toggle("Use System prompt", value=True)
+    exportToReplIt = st.sidebar.toggle("Export to repl.it", value=False)
+    showImages = st.sidebar.toggle("Show images", value=True)
     
 # Retrieve the corresponding language code from the dictionary
 selected_language_code = GOOGLE_LANGUAGES_TO_CODES[selected_language_name]
@@ -48,7 +50,7 @@ def predict(message):
         st.write("Done...")
         
         st.write("Checking images...")
-    if 'images' in response.keys():
+    if 'images' in response.keys() and showImages:
         for i in response['images']:
             st.image(i)
     
@@ -72,13 +74,17 @@ if prompt := st.chat_input("Ask Palm 2 anything..."):
         st.markdown(response['content'])
     
     if response['code']:
-        with st.status("Exporting replit..."):
-            url = bard.export_replit(
-                code=response['code'],
-                program_lang=response['program_lang'],
-            )['url']
-        st.title('Export to repl.it')
-        st.markdown(f'[link]({url})')
+        if exportToReplIt:
+            with st.status("Exporting replit..."):
+                fale = False
+                try:
+                    url = bard.export_replit(code=response['code'],program_lang=response['program_lang'])['url']
+                except error:
+                    fale=True
+                    st.write('ERROR')
+            if not fale:
+                st.title('Export to repl.it')
+                st.markdown(f'[link]({url})')
         if code_interpreter:
             try:
                 exec(response['code'])
